@@ -1,0 +1,23 @@
+<h4>以下の内容でよろしいですか？</h4>
+
+<%= form_with(model: @task, url:tasks_path, local: true) do |form| %>
+
+  <%= form.hidden_field :title %>
+  <p>タスク名: <%= @task.title %></p>
+
+  <%= form.hidden_field :content %>
+  <p>タスク詳細: <%= @task.content %></p>
+
+  <%= form.hidden_field :deadline %>
+  <p>終了期限: <%= @task.deadline %></p>
+
+  <%= form.hidden_field :status %>
+  <p>ステータス: <%= @task.status %></p>
+
+  <%= form.hidden_field :priority %>
+  <p>優先度: <%= @task.priority %></p>
+
+  <%= form.submit "投稿する" %>
+  <%= form.submit "戻る", name: 'back' %>
+
+<% end %>
