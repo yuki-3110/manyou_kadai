@@ -1,24 +1,35 @@
-# README
+# テーブルスキーマについて
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## ①Userモデル
+|  カラム名  |  データ型  |
+| ---- | ---- |
+|  name  |  string  |
+|  email  |  string  |
+|  password  |  string  |  
 
-Things you may want to cover:
+<br>
 
-* Ruby version
+## ②Taskモデル
+|  カラム名  |  データ型  |
+| ---- | ---- |
+|  title |  string  |
+|  content  |  string  |
+|  deadline  |  datetime  |
+|  status  |  string  |
+|  priority  |  string  |
 
-* System dependencies
+<br>
 
-* Configuration
+## ③Labelモデル
+|  カラム名  |  データ型  |
+| ---- | ---- |
+|  name  |  string  |
+|  user.id  |  bigint |
 
-* Database creation
+<br>
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## ④middleモデル
+|  カラム名  |  データ型  |
+| ---- | ---- |
+|  task.id  |  bigint  |
+|  label.id  |  bigint  |
