@@ -28,7 +28,7 @@
 
 <br>
 
-## ④middleモデル
+## ④Middleモデル
 |  カラム名  |  データ型  |
 | ---- | ---- |
 |  task.id  |  bigint  |
