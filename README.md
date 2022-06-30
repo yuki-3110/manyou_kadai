@@ -28,8 +28,42 @@
 
 <br>
 
-## ④middleモデル
+## ④Middleモデル
 |  カラム名  |  データ型  |
 | ---- | ---- |
 |  task.id  |  bigint  |
 |  label.id  |  bigint  |
+
+<br>
+
+# Herokuのデプロイ手順
+1.rootの設定 config/routes.rb
+
+```
+root 'tasks#index'
+```
+<br>
+
+2.Herokuに新しいアプリケーションを作成
+```
+$ heroku create
+```
+<br>
+
+3.コミット
+```
+$ git add -A
+$ git commit -m "コミットメッセージ"
+```
+<br>
+
+4.Herokuにデプロイ
+```
+$ git push heroku master
+```
+<br>
+
+5.データベースの移行
+```
+$ heroku run rails db:migrate
+```
