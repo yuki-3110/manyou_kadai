@@ -11,7 +11,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         find("#task_priority").find("option[value='高']").select_option
         click_button '投稿する'
         click_button '投稿する'
-        click_link '投稿一覧に戻る'
+        expect(page).to have_content 'task'
       end
     end
   end
