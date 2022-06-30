@@ -53,7 +53,7 @@ $ heroku create
 3.コミット
 ```
 $ git add -A
-$ git commit -m "init"
+$ git commit -m "コミットメッセージ"
 ```
 <br>
 
