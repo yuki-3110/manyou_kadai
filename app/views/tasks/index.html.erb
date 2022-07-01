@@ -25,3 +25,11 @@
   </table>
 
 <%= link_to "タスクを追加する", new_task_path %>
+<br>
+
+<%  if @tasks.present?  %>
+  <%= link_to "終了期限をソートする",tasks_path(sort_expired: "true") %>
+<% else %>
+  <td></td>
+<% end %>
+
