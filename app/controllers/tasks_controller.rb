@@ -7,7 +7,7 @@ class TasksController < ApplicationController
     @tasks = Task.all.order(deadline: :desc) if params[:sort_expired]
 
     @tasks = Task.all.order(priority: :asc) if params[:sort2_expired]
-    @tasks = Task.search_with_priority(params[:priority]) if params[:priority].present?
+    @tasks = Task.search_with_status(params[:status]) if params[:status].present?
 
     # @tasks = @tasks.search_with_priority(params[:priority])
   end
