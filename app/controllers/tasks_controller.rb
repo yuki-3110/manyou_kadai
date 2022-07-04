@@ -3,9 +3,13 @@ class TasksController < ApplicationController
 
   def index
     @tasks = Task.all.order(created_at: :desc)
-    if params[:sort_expired]
-      @tasks = Task.all.order(deadline: :desc)
-    end
+    # @tasks = Task.where(status: params[:status])
+    @tasks = Task.all.order(deadline: :desc) if params[:sort_expired]
+
+    @tasks = Task.all.order(priority: :asc) if params[:sort2_expired]
+    @tasks = Task.search_with_priority(params[:priority]) if params[:priority].present?
+
+    # @tasks = @tasks.search_with_priority(params[:priority])
   end
 
   def new
@@ -45,6 +49,11 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     render :new if @task.invalid?
   end
+
+  # def search
+  #   @tasks = Task.where(priority: params[:priority])
+  #   # status_ids = Task.where("status = ?", params[:status]).pluck(:id)
+  # end
 
   private
 

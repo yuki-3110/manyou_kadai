@@ -33,7 +33,10 @@
 
   <div class="field">
     <%= form.label :priority %>
-    <%= form.select :priority, ['高', '中', '低'], {include_blank: '選択してください'} %>
+    <%= form.select :priority, Task.priorities.keys.map {|k| [t("enums.task.priority.#{k}"), k]} %>
+    <%#= form.select :priority, ['高', '中', '低'], {include_blank: '選択してください'} %>
+    <%#= f.select :priority, options_for_select(Task.priorities.keys.map {
+      |k| [t("enums.task.priority.#{k}"), k]}),{ prompt: t('view.search_by_priority') } %>
   </div>
 
   <div class="actions mt-5">
