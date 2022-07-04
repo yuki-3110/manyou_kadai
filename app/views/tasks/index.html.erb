@@ -2,11 +2,16 @@
 
 <h1>タスク一覧</h1>
 
-<%= form_with(url: tasks_path, method: :get, local: true) do |f| %>
+<%#= form_with(url: tasks_path, method: :get, local: true, scope: :task) do |f| %>
+<%= form_with(url: tasks_path, method: :get, local: true, scope: :task) do |f| %>
   <div class="field">
       
     <%#= f.label :priority_search, t('.priority_search'), value: params[:priority] %>
-    <%= f.select :status, Task.statuses.keys.map {|k| [t("enums.task.status.#{k}"), k]} %>
+    <%#= f.select :title, Task.titles.keys.map {|k| [t("enums.task.title.#{k}"), k]} %>
+    
+    <%#= f.search_field(params[:title]) %>
+    <%= f.text_field :title %>
+    <%= f.select :status, Task.statuses.keys.map {|k| [t("enums.task.status.#{k}"), k]}, include_blank: '選択してください' %>
     <%#= f.select :priority, options_for_select(Task.priorities.keys.to_a.map {prompt: t('view.search_with_priority')}) %>
 
 
@@ -33,7 +38,6 @@
       <td><%= task.title %></td>
       <td><%= task.content %></td>
       <td><%= task.deadline.strftime("%Y-%m-%d") %></td>
-      
       <td><%= t("enums.task.status.#{task.status}") %></td>
       <td><%= t("enums.task.priority.#{task.priority}") %></td>
       <td><%= link_to "詳細", task_path(task.id) %></td>

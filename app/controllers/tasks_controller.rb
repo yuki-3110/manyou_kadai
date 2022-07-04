@@ -2,12 +2,45 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i(show edit update destroy)
 
   def index
-    @tasks = Task.all.order(created_at: :desc)
+    # @title = Task.group(:title).pluck(:title).sort
+    @tasks = Task.all.order(created_at: :desc) 
+    # @tasks = Task.all.order(created_at: :desc) and return unless params[:task].present?
     # @tasks = Task.where(status: params[:status])
     @tasks = Task.all.order(deadline: :desc) if params[:sort_expired]
 
     @tasks = Task.all.order(priority: :asc) if params[:sort2_expired]
-    @tasks = Task.search_with_status(params[:status]) if params[:status].present?
+
+    if params[:task].present?
+      if params[:task][:status].present? && params[:task][:title].present?
+        # @tasks = Task.search_with_status(params[:task][:status])
+        # @tasks = Task.search_with_title(params[:task][:title])
+        @tasks = Task.search_with_both(params[:task][:status], params[:task][:title])
+      elsif params[:task][:status].present?
+        @tasks = Task.search_with_status(params[:task][:status])
+      elsif params[:task][:title].present?
+        @tasks = Task.search_with_title(params[:task][:title])
+      end
+    end
+
+    # if params[:task].present?
+    #   if params[:task][:title].present?
+    #     @tasks = Task.search_with_title(params[:task][:title])
+    #   elsif params[:task][:status].present?
+    #     @tasks = Task.search_with_status(params[:task][:status])
+    #   end
+    # end
+
+    # if params[:task].present?
+    #   if params[:task][:title].present?
+    #     @tasks = Task.search_with_title(params[:task][:title])
+    #   end
+    # end
+
+    # @tasks = Task.search_with_title(params[:title]) if params[:title].present?
+    # @tasks = Task.search_with_status(params[:status]) if params[:status].present?
+
+    # @tasks = Task.search_with_title(params[:task][:title]) if params[:task][:title]
+    # @tasks = Task.search_with_status(params[:task][:status]) if params[:task]
 
     # @tasks = @tasks.search_with_priority(params[:priority])
   end
