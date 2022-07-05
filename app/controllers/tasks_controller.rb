@@ -10,14 +10,13 @@ class TasksController < ApplicationController
 
     if params[:task].present?
       if params[:task][:status].present? && params[:task][:title].present?
-        # @tasks = Task.search_with_status(params[:task][:status])
-        # @tasks = Task.search_with_title(params[:task][:title])
         @tasks = Task.search_with_both(params[:task][:status], params[:task][:title])
       elsif params[:task][:status].present?
         @tasks = Task.search_with_status(params[:task][:status])
       elsif params[:task][:title].present?
         @tasks = Task.search_with_title(params[:task][:title])
       end
+      @tasks = @tasks.page(params[:page]).per(2)
     end
   end
 
