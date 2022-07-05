@@ -41,19 +41,22 @@
   <br>
   <%= link_to "タスクを追加する", new_task_path %>
   <br>
+
   <%  if @tasks.present?  %>
     <%= link_to "終了期限をソートする",tasks_path(sort_expired: "true") %>
   <% else %>
     <td></td>
   <% end %>
+
   <br>
   <%  if @tasks.present?  %>
     <%= link_to "優先順位の高い順に並び替える",tasks_path(sort2_expired: "true") %>
   <% else %>
     <td></td>
   <% end %>
+  
   <br>
   <div class="mt-3" >
-    <%= paginate @tasks, theme: 'twitter-bootstrap-4' %>
+    <%#= paginate @tasks, theme: 'twitter-bootstrap-4' %>
   </div>
 </div>

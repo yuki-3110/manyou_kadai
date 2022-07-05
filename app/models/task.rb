@@ -20,6 +20,8 @@ class Task < ApplicationRecord
     where(status: status) 
   }
 
+  paginates_per 2
+
 end
 
 
