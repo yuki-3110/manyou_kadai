@@ -3,7 +3,9 @@ class TasksController < ApplicationController
 
   def index
     # @title = Task.group(:title).pluck(:title).sort
-    @tasks = Task.all.order(created_at: :desc) 
+    @tasks = Task.all.order(created_at: :desc).page(params[:page]).per(2)
+
+    # @tasks = Task.page(params[:page]).per(2)
     # @tasks = Task.all.order(created_at: :desc) and return unless params[:task].present?
     # @tasks = Task.where(status: params[:status])
     @tasks = Task.all.order(deadline: :desc) if params[:sort_expired]
@@ -21,6 +23,8 @@ class TasksController < ApplicationController
         @tasks = Task.search_with_title(params[:task][:title])
       end
     end
+
+    
 
     # if params[:task].present?
     #   if params[:task][:title].present?
