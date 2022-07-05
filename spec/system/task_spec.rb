@@ -16,6 +16,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       end
     end
   end
+
   describe '一覧表示機能' do
     before do
       task = FactoryBot.create(:task, title: 'task1', content: '買い物', deadline: '2022-07-06', status: 'not_yet', priority: 'high')
@@ -35,6 +36,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       end
     end
   end
+
   describe '詳細表示機能' do
     context '任意のタスク詳細画面に遷移した場合' do
       it '該当タスクの内容が表示される' do
@@ -45,6 +47,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       end
     end
   end
+  
   describe '検索機能' do
     before do
       task = FactoryBot.create(:task, title: 'task1', content: '買い物', deadline: '2022-07-06', status: 'not_yet', priority: 'high')
