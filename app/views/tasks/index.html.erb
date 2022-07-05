@@ -1,27 +1,62 @@
-<p><%= notice %></p>
+<div class="container" style="width: 600px;">
 
-<h1>タスク一覧</h1>
+  <p><%= notice %></p>
 
-  <table>
-    <tr>
-      <th>タスク名</th>
-      <th>タスク詳細</th>
-      <th>終了期限</th>
-      <th>ステータス</th>
-      <th>優先度</th>
-    </tr>
-  <% @tasks.each do |task| %>
-    <tr class= "task_row">
-      <td><%= task.title %></td>
-      <td><%= task.content %></td>
-      <td><%= task.deadline %></td>
-      <td><%= task.status %></td>
-      <td><%= task.priority %></td>
-      <td><%= link_to "詳細", task_path(task.id) %></td>
-      <td><%= link_to "編集", edit_task_path(task.id) %></td>
-      <td><%= link_to "削除", task_path(task.id), method: :delete, data:{confirm: "本当に削除していいですか？"} %></td>
-    </tr>
+  <h5>タスク一覧</h5>
+
+  <%= form_with(url: tasks_path, method: :get, local: true, scope: :task) do |f| %>
+    <div class="field">
+      <%= f.text_field :title, placeholder: "タスク名を入力" %>
+      <%= f.select :status, Task.statuses.keys.map {|k| [t("enums.task.status.#{k}"), k]}, include_blank: 'ステータスを選択' %>
+      <%= f.submit "検索", class: "search-btn" %>
+    </div>
   <% end %>
-  </table>
 
-<%= link_to "タスクを追加する", new_task_path %>
+  <div class="card mt-5" style="width: 40rem;">
+    <div class="card-body" >
+      <table>
+        <tr>
+          <th>タスク名</th>
+          <th>タスク詳細</th>
+          <th>終了期限</th>
+          <th>ステータス</th>
+          <th>優先度</th>
+        </tr>
+      <% @tasks.each do |task| %>
+        <tr class= "task_row">
+          <td><%= task.title %></td>
+          <td><%= task.content %></td>
+          <td><%= task.deadline.strftime("%Y-%m-%d") %></td>
+          <td><%= t("enums.task.status.#{task.status}") %></td>
+          <td><%= t("enums.task.priority.#{task.priority}") %></td>
+          <td><%= link_to "詳細", task_path(task.id), class: 'btn btn-primary btn-sm' %></td>
+          <td><%= link_to "編集", edit_task_path(task.id), class: 'btn btn-primary btn-sm' %></td>
+          <td><%= link_to "削除", task_path(task.id), class: 'btn btn-primary btn-sm', method: :delete, data:{confirm: "本当に削除していいですか？"} %></td>
+        </tr>
+      <% end %>
+      </table>
+    </div>
+  </div>
+
+  <br>
+  <%= link_to "タスクを追加する", new_task_path %>
+  <br>
+
+  <%  if @tasks.present?  %>
+    <%= link_to "終了期限をソートする",tasks_path(sort_expired: "true") %>
+  <% else %>
+    <td></td>
+  <% end %>
+
+  <br>
+  <%  if @tasks.present?  %>
+    <%= link_to "優先順位の高い順に並び替える",tasks_path(sort2_expired: "true") %>
+  <% else %>
+    <td></td>
+  <% end %>
+  
+  <br>
+  <div class="mt-3" >
+    <%#= paginate @tasks, theme: 'twitter-bootstrap-4' %>
+  </div>
+</div>

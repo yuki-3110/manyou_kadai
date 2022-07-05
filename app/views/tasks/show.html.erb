@@ -1,9 +1,10 @@
-<h4>ブログ詳細画面</h4>
-
-<p>タイトル: <%= @task.title %></p>
-<p>タイトル: <%= @task.content %></p>
-<p>タイトル: <%= @task.deadline %></p>
-<p>タイトル: <%= @task.status %></p>
-<p>タイトル: <%= @task.priority %></p>
+<br>
+<h5>ブログ詳細画面</h5>
+<br>
+<p>タスク名: <%= @task.title %></p>
+<p>タスク詳細: <%= @task.content %></p>
+<p>終了期限: <%= @task.deadline.strftime("%Y-%m-%d")  %></p>
+<p>ステータス: <%= t("enums.task.status.#{@task.status}") %></p>
+<p>優先度: <%= t("enums.task.priority.#{@task.priority}") %></p>
 
 <%= link_to "投稿一覧に戻る", tasks_path %>

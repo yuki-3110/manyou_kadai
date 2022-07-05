@@ -1,45 +1,54 @@
-<%= form_with(model: task, local: true, url: choose_new_or_edit) do |form| %>
-<%#= form_with(model: task, local: true) do |form| %>
-  <% if task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(task.errors.count, "error") %> 件のエラーがあります。</h2>
-      <ul>
-        <% task.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div class="container text-center" style="width: 400px;">
+
+  <%= form_with(model: task, local: true, url: choose_new_or_edit) do |form| %>
+    <% if task.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(task.errors.count, "error") %> 件のエラーがあります。</h2>
+        <ul>
+          <% task.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title, class: 'form-control' %>
     </div>
+
+    <div class="field">
+      <%= form.label :content %>
+      <%= form.text_field :content, class: 'form-control' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :deadline %>
+      <%= form.date_field :deadline, class: 'form-control' %>
+    </div>
+
+    <br>
+
+    <div class="field">
+      <%= form.label :status %>
+      <%= form.select :status, Task.statuses.keys.map {|k| [t("enums.task.status.#{k}"), k]}, include_blank: '選択してください', class: 'form-control'  %>
+    </div>
+
+    <br>
+
+    <div class="field">
+      <%= form.label :priority %>
+      <%= form.select :priority, Task.priorities.keys.map {|k| [t("enums.task.priority.#{k}"), k]}, include_blank: '選択してください', class: 'form-control'  %>
+    </div>
+
+    <div class="actions mt-5">
+      <%= form.submit "登録する", class:'btn btn-block btn-primary btn-sm' %>
+    </div>
+
   <% end %>
+    <%= link_to "タスク一覧に戻る", tasks_path %>
+</div>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
 
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_field :content %>
-  </div>
 
-  <div class="field">
-    <%= form.label :deadline %>
-    <%= form.date_field :deadline %>
-  </div>
 
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.select :status, ['着手', '未着手', '完了'], {include_blank: '選択してください'} %>
-  </div>
-
-  <div class="field">
-    <%= form.label :priority %>
-    <%= form.select :priority, ['高', '中', '低'], {include_blank: '選択してください'} %>
-  </div>
-
-  <div class="actions mt-5">
-    <%= form.submit "投稿する", class:'btn btn-block btn-dark btn-sm' %>
-  </div>
-
-<% end %>
-
-<%= link_to "投稿一覧に戻る", tasks_path %>

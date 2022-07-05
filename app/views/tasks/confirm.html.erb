@@ -1,5 +1,6 @@
-<h4>以下の内容でよろしいですか？</h4>
-
+<br>
+<h5>以下の内容でよろしいですか？</h5>
+<br>
 <%= form_with(model: @task, url:tasks_path, local: true) do |form| %>
 
   <%= form.hidden_field :title %>
@@ -9,15 +10,15 @@
   <p>タスク詳細: <%= @task.content %></p>
 
   <%= form.hidden_field :deadline %>
-  <p>終了期限: <%= @task.deadline %></p>
+  <p>終了期限: <%= @task.deadline.strftime("%Y-%m-%d") %></p>
 
   <%= form.hidden_field :status %>
-  <p>ステータス: <%= @task.status %></p>
+  <p>ステータス: <%= t("enums.task.status.#{@task.status}") %></p>
 
   <%= form.hidden_field :priority %>
-  <p>優先度: <%= @task.priority %></p>
+  <p>優先度: <%= t("enums.task.priority.#{@task.priority}") %></p>
 
-  <%= form.submit "投稿する" %>
+  <%= form.submit "登録する" %>
   <%= form.submit "戻る", name: 'back' %>
 
 <% end %>
