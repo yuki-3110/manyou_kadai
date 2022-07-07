@@ -1,0 +1,40 @@
+<div class = "container text-center"> 
+  <% if @user.errors.any? %>
+    <div id = "error_explanation">
+      <h2><% pluralize(@user.errors.count, "error") %> prohibited this <% user.name %> from being saved </h2>
+      <ul>
+        <% @user.errors.full_massages.each do |massage| %>
+          <li><%= massage %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <br>
+  <h4>Sign up</h4>
+
+  <br>
+  <%= form_with(model: @user, local: true) do |f| %>
+    <div class = "mx-auto" style= "width: 500px;">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.label :email %>
+      <%= f.email_field :email, class: 'form-control' %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'form-control' %>
+
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+      <div class = "action mt-5">
+        <%= f.submit "アカウント登録", class: 'btn btn-block btn-primary btn-sm' %>
+      </div>
+    </div>
+  <% end %>
+
+  <br>
+  <%#= link_to 'すでにアカウントをお持ちの方はこちら', new_session_path %>
+</div>

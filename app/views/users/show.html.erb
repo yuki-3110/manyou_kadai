@@ -1,0 +1,12 @@
+<div class = container text-center>
+
+  <div class="mx-auto" style="width: 500px;">
+    <h4><%= @user.name %>のページ</h4>
+    <h6>プロフィール</h6>
+  </div>
+
+  <div>
+    <%= link_to 'タスク投稿一覧', tasks_paht %>
+    <%#= link_to 'ログアウト', session_path(current_user.id), method: :delete %>
+  </div>
+</div>
