@@ -1,5 +1,7 @@
 <div class ="container text-center">
   <br>
+  <%= notice %>
+  <br>
   <h6>ログインには以下のご入力が必要です。</h6>
   <br>
   <%= form_with(scope: :session, url:sessions_path, local: true ) do |f| %>
