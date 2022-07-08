@@ -24,7 +24,6 @@
 
       <body>
         <% @user_tasks.each do |task| %>
-          <tr>
             <td><%= task.user.name %></td>
             <td><%= task.title %></td>
             <td><%= task.content %></td>

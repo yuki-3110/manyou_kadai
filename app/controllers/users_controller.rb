@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
-  skip_before_action :login_required, only: %i(new create)
+  skip_before_action :login_required, only: %i(new create show)
   before_action :set_user, only: %i(show edit update)
   before_action :user_check, only: %i(show)
+
 
   def new
     redirect_to tasks_path, notice: "すでにアカウントは登録されています" if logged_in?
