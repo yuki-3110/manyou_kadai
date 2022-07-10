@@ -10,12 +10,11 @@
     </div>
   <% end %>
 
-
   <br>
   <h4>Sign up</h4>
 
   <br>
-  <%= form_with(model: @user, local: true) do |f| %>
+  <%= form_with(model: [:admin,@user], local: true) do |f| %>
     <div class = "mx-auto" style= "width: 500px;">
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
@@ -28,15 +27,13 @@
 
       <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
+      <br>
+      <%= f.label :管理者権限 %>
+      <%= f.check_box :admin %>
 
-      <div class = "action mt-5">
+      <div class = "action mt-3">
         <%= f.submit "アカウント登録", class: 'btn btn-block btn-primary btn-sm' %>
       </div>
     </div>
   <% end %>
-
-  <br>
-  <%= link_to 'すでにアカウントをお持ちの方はこちら', new_session_path %>
-  <br>
-  <%= link_to "管理者専用のアカウント作成を希望される場合はこちら", new_admin_user_path %>
 </div>
