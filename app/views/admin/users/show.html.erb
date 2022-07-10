@@ -1,0 +1,41 @@
+<div class = "container text-center" >
+  <br>
+  <div class="mx-auto" style="width: 500px;">
+    <h4><%= @user.name %>のページ</h4>
+    <br>
+    <h6>タスク一覧</h6>
+    <table>
+      <thead>
+        <% if @user_tasks.empty? %>
+          <tr>
+            <th></th>
+          </tr>
+        <% else %>
+          <tr>
+            <th>タスク登録者</th>
+            <th>タスク名</th>
+            <th>タスク詳細</th>
+            <th>終了期限</th>
+            <th>ステータス</th>
+            <th>優先度</th>
+          </tr>
+        <% end %>
+      </thead>
+
+      <body>
+        <% @user_tasks.each do |task| %>
+            <td><%= task.user.name %></td>
+            <td><%= task.title %></td>
+            <td><%= task.content %></td>
+            <td><%= task.deadline.strftime("%Y-%m-%d") %></td>
+            <td><%= t("enums.task.status.#{task.status}") %></td>
+            <td><%= t("enums.task.priority.#{task.priority}") %></td>
+          </tr>
+        <% end %>
+      </body>
+    </table>
+  </div>
+    <br>
+    <%= link_to 'タスク投稿一覧', tasks_path %>
+    <%= link_to 'ログアウト', session_path(current_user.id), method: :delete %>
+</div>

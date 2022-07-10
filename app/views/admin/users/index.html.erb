@@ -26,6 +26,6 @@
     </div>
       <br>
       <%= link_to '新たにユーザーを登録する', new_admin_user_path %>
-      <%#= link_to 'ログアウト', admin_session_path(current_user.id), method: :delete %>
+      <%= link_to 'ログアウト', session_path(current_user.id), method: :delete %>
   </div>
 </div>
