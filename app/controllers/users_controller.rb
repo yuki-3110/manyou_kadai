@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   skip_before_action :login_required, only: %i(new create show)
 
   def new
-    redirect_to tasks_path, notice: "すでにアカウントは登録されています" if logged_in?
+    redirect_to tasks_path, notice: "すでにアカウントが登録されています" if logged_in?
     @user = User.new
   end
 
@@ -27,6 +27,4 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
-
-
 end
