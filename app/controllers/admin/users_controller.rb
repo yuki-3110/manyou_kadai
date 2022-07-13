@@ -1,7 +1,6 @@
 class Admin::UsersController < ApplicationController
   skip_before_action :login_required
   before_action :if_not_admin
-  # before_action :if_not_admin, only: %i(index show edit update destroy)
   before_action :set_user, only: %i(show edit update destroy)
 
   def index
