@@ -17,18 +17,13 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-primary ">
       <div class="container-fluid">
         <a class="navbar-brand text-white">taskapp</a>
-
           <ul class="d-flex navbar-nav me-auto mb-2 mb-lg-0">
-            <% if logged_in? && current_user.admin? %>
-              <li class="nav-item"><%= link_to "Profile", user_path(current_user.id), class: 'text-white nav-link' %></li>
-              <li class="nav-item"><%#= link_to "タスク一覧", tasks_path, class: 'text-white nav-link' %></li>
-              <li class="nav-item"><%= link_to "Logout", session_path(current_user.id), class: 'text-white nav-link', method: :delete %></li>
-              <li class="nav-item"><%= link_to "管理者用ユーザ一覧", admin_users_path, class: 'text-white nav-link' %></li>
-              <li class="nav-item"><%= link_to "管理者用ユーザ一作成", new_admin_user_path, class: 'text-white nav-link' %></li>
-            <% elsif logged_in?  %>
+            <% if logged_in? %>
               <li class="nav-item"><%= link_to "タスク一覧", tasks_path, class: 'text-white nav-link' %></li>
               <li class="nav-item"><%= link_to "Profile", user_path(current_user.id), class: 'text-white nav-link' %></li>
               <li class="nav-item"><%= link_to "Logout", session_path(current_user.id), class: 'text-white nav-link', method: :delete %></li>
+              <li class="nav-item"><%= link_to "管理者用ユーザー一覧", admin_users_path, class: 'text-white nav-link' %></li>
+              <li class="nav-item"><%= link_to "管理者用ユーザ一作成", new_admin_user_path, class: 'text-white nav-link' %></li>
             <% else %>
               <li class="nav-item"><%= link_to "Sign up", new_user_path, class: 'text-white nav-link' %></li>
               <li class="nav-item"><%= link_to "Login", new_session_path, class: 'text-white nav-link' %></li>
