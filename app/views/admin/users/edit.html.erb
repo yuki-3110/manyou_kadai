@@ -1,0 +1,43 @@
+<div class = "container text-center"> 
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this <%= @user.name %> from being saved:</h2>
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <br>
+  <h4>編集</h4>
+
+  <br>
+
+  <%= form_with(model: [:admin,@user], local: true) do |f| %>
+    <div class = "mx-auto" style= "width: 500px;">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.label :email %>
+      <%= f.email_field :email, class: 'form-control' %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'form-control' %>
+
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+      <%= f.label :admin %>
+      <%= f.check_box :admin %>
+
+      <div class = "action mt-5">
+        <%= f.submit "編集", class: 'btn btn-block btn-primary btn-sm' %>
+      </div>
+    </div>
+  <% end %>
+
+  <br>
+  <%= link_to 'ユーザー一覧に戻る', admin_users_path %>
+</div>

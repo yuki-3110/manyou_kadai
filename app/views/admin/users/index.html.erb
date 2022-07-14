@@ -1,0 +1,30 @@
+<div class="container mt-5" style="width: 600px;">
+  <div class = "container text-center" >
+  <br>
+    <div class="mx-auto" style="width: 500px;">
+      <h6>ユーザ一覧</h6>
+      <table>
+        <thead>
+            <tr>
+              <th>ユーザー</th>
+              <th>タスク登録数</th>
+            </tr>
+        </thead>
+
+        <body>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= user.name %>
+              <td><%= user.tasks.count %>
+              <td><%= link_to "詳細", admin_user_path(user.id), class: 'btn btn-primary btn-sm' %></td>
+              <td><%= link_to "編集", edit_admin_user_path(user.id), class: 'btn btn-primary btn-sm' %></td>
+              <td><%= link_to "削除", admin_user_path(user.id), class: 'btn btn-primary btn-sm', method: :delete, data:{confirm: "本当に削除していいですか？"} %></td>
+            </tr>
+          <% end %>
+        </body>
+      </table>
+    </div>
+    <br>
+    <%= link_to '新たにユーザーを登録する', new_admin_user_path %>
+  </div>
+</div>
