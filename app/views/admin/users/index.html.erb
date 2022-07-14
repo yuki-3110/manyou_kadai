@@ -7,6 +7,7 @@
         <thead>
             <tr>
               <th>ユーザー</th>
+              <th>ユーザー区分</th>
               <th>タスク登録数</th>
             </tr>
         </thead>
@@ -15,6 +16,7 @@
           <% @users.each do |user| %>
             <tr>
               <td><%= user.name %>
+              <td><%= user.admin %></td>
               <td><%= user.tasks.count %>
               <td><%= link_to "詳細", admin_user_path(user.id), class: 'btn btn-primary btn-sm' %></td>
               <td><%= link_to "編集", edit_admin_user_path(user.id), class: 'btn btn-primary btn-sm' %></td>
