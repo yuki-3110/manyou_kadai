@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :user do
-    # id { 1 }
     name { 'test_user_01' }
     email { 'test_user_01@test.com' }
     password { '11111111' }
@@ -9,7 +8,6 @@ FactoryBot.define do
   end
 
   factory :user_second, class: User do
-    # id { 2 }
     name { 'test_user_02' }
     email { 'test_user_02@test.com' }
     password { '22222222' }

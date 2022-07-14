@@ -12,7 +12,7 @@ RSpec.describe 'ユーザー登録・セッション機能・管理画面のテ�
         click_on 'アカウント登録'
         expect(page).to have_content 'test_user_01'
       end
-      
+
       it '​ログインせずタスク一覧画面に飛ぼうとしたとき、ログイン画面に遷移する​' do
         visit tasks_path
         expect(current_path).to eq new_session_path
