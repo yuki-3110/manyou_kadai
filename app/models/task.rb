@@ -1,4 +1,6 @@
 class Task < ApplicationRecord
+  has_many :middle, dependent: :destroy
+  has_many :middle_labels, through: :middle, source: :label
   belongs_to :user
   validates :title, presence: true
   validates :content, presence: true

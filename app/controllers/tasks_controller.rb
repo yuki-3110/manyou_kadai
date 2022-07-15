@@ -6,11 +6,6 @@ class TasksController < ApplicationController
     @tasks = @tasks.order(deadline: :desc) if params[:sort_expired]
     @tasks = @tasks.order(priority: :asc) if params[:sort2_expired]
 
-    #質問 Logout機能  野村さん参照
-    # if current_user.admin?
-    #   @task = Task.all.order(created_at: :desc).page(params[:page]).per(2)
-    # end
-
     if params[:task].present?
       if params[:task][:status].present? && params[:task][:title].present?
         @tasks = @tasks.search_with_both(params[:task][:status], params[:task][:title])
