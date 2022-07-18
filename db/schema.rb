@@ -10,17 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_15_022601) do
+ActiveRecord::Schema.define(version: 2022_07_17_045115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "labels", force: :cascade do |t|
     t.string "name"
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_labels_on_user_id"
   end
 
   create_table "middles", force: :cascade do |t|
@@ -55,7 +53,6 @@ ActiveRecord::Schema.define(version: 2022_07_15_022601) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "labels", "users"
   add_foreign_key "middles", "labels"
   add_foreign_key "middles", "tasks"
   add_foreign_key "tasks", "users"

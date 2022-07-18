@@ -1,4 +1,4 @@
-<div class="container mt-5" style="width: 600px;">
+<div class="container mt-5" style="width: 900px;">
   
   <p><%= notice %></p>
 
@@ -8,13 +8,14 @@
     <div class="field">
       <%= f.text_field :title, placeholder: "タスク名を入力" %>
       <%= f.select :status, Task.statuses.keys.map {|k| [t("enums.task.status.#{k}"), k]}, include_blank: 'ステータスを選択' %>
+      <%= f.select("label_id", Label.pluck(:name, :id), { include_blank: true }) %>
       <%= f.submit "検索", class: "search-btn" %>
     </div>
   <% end %>
 
-  <div class="card mt-5" style="width: 50rem;">
+  <div class="card mt-5" style="width: 80rem;">
     <div class="card-body" >
-      <table>
+      <table class="table table-striped">
         <tr>
           <th>タスク登録者</th>
           <th>タスク名</th>
@@ -22,6 +23,7 @@
           <th>終了期限</th>
           <th>ステータス</th>
           <th>優先度</th>
+          <th>分類</th>
         </tr>
       <% @tasks.each do |task| %>
         <tr class= "task_row">
@@ -31,6 +33,11 @@
           <td><%= task.deadline.strftime("%Y-%m-%d") %></td>
           <td><%= t("enums.task.status.#{task.status}") %></td>
           <td><%= t("enums.task.priority.#{task.priority}") %></td>
+          <td>
+            <% task.labels.each do |label| %>
+              <%= label.name %>
+            <% end %>
+          </td>
           <td><%= link_to "詳細", task_path(task.id), class: 'btn btn-primary btn-sm' %></td>
           <td><%= link_to "編集", edit_task_path(task.id), class: 'btn btn-primary btn-sm' %></td>
           <td><%= link_to "削除", task_path(task.id), class: 'btn btn-primary btn-sm', method: :delete, data:{confirm: "本当に削除していいですか？"} %></td>
@@ -52,7 +59,7 @@
 
   <br>
   <%  if @tasks.present?  %>
-    <%= link_to "優先順位の高い順に並び替える",tasks_path(sort2_expired: "true") %>
+    <%= link_to "優先順位の高い順に並び替える",tasks_path(sort_priority: "true") %>
   <% else %>
     <td></td>
   <% end %>

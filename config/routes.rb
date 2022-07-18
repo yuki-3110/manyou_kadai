@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'users#new'
   resources :sessions, only: %i(new create destroy)
   resources :users, only: %i(index new create show edit update) 
+  resources :labels
 
   namespace :admin do
     resources :users
@@ -12,4 +13,5 @@ Rails.application.routes.draw do
       post :confirm
     end
   end
+  # resources :middles, only: %i(:create, :destroy)
 end

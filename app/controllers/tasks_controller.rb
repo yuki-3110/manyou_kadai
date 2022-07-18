@@ -4,7 +4,8 @@ class TasksController < ApplicationController
   def index
     @tasks = current_user.tasks
     @tasks = @tasks.order(deadline: :desc) if params[:sort_expired]
-    @tasks = @tasks.order(priority: :asc) if params[:sort2_expired]
+    @tasks = @tasks.order(priority: :asc) if params[:sort_priority]
+
 
     if params[:task].present?
       if params[:task][:status].present? && params[:task][:title].present?
@@ -13,6 +14,8 @@ class TasksController < ApplicationController
         @tasks = @tasks.search_with_status(params[:task][:status])
       elsif params[:task][:title].present?
         @tasks = @tasks.search_with_title(params[:task][:title])
+      elsif params[:task][:label_id].present?
+        @tasks = @tasks.joins(:labels).search_with_label(params[:task][:label_id])
       end
     end
     @tasks = @tasks.order(created_at: :desc).page(params[:page]).per(2)
@@ -38,6 +41,7 @@ class TasksController < ApplicationController
   end
 
   def show
+    # @middle = current_user.middles.find_by(task_id: @task.id)
   end
 
   def edit
@@ -68,7 +72,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :content, :deadline, :status, :priority, :user_id)
+    params.require(:task).permit(:title, :content, :deadline, :status, :priority, :user_id, { label_ids: [] } )
   end
 
 end
