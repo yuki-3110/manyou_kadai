@@ -34,6 +34,8 @@ gem 'bootstrap4-kaminari-views'
 
 gem 'bcrypt'
 
+gem 'faker'
+
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
@@ -53,8 +55,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.8'
   gem 'spring-commands-rspec'
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'launchy'
+
 end
 
 

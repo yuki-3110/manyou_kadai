@@ -1,4 +1,6 @@
 class Task < ApplicationRecord
+  has_many :middles, dependent: :destroy
+  has_many :labels, through: :middles
   belongs_to :user
   validates :title, presence: true
   validates :content, presence: true
@@ -18,6 +20,10 @@ class Task < ApplicationRecord
 
   scope :search_with_status, ->(status){ 
     where(status: status) 
+  }
+
+  scope :search_with_label, ->(label){
+    joins(:labels).where('label_id = ?', label)
   }
 
   paginates_per 2

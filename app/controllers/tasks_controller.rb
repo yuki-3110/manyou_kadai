@@ -4,12 +4,8 @@ class TasksController < ApplicationController
   def index
     @tasks = current_user.tasks
     @tasks = @tasks.order(deadline: :desc) if params[:sort_expired]
-    @tasks = @tasks.order(priority: :asc) if params[:sort2_expired]
+    @tasks = @tasks.order(priority: :asc) if params[:sort_priority]
 
-    #質問 Logout機能  野村さん参照
-    # if current_user.admin?
-    #   @task = Task.all.order(created_at: :desc).page(params[:page]).per(2)
-    # end
 
     if params[:task].present?
       if params[:task][:status].present? && params[:task][:title].present?
@@ -18,6 +14,8 @@ class TasksController < ApplicationController
         @tasks = @tasks.search_with_status(params[:task][:status])
       elsif params[:task][:title].present?
         @tasks = @tasks.search_with_title(params[:task][:title])
+      elsif params[:task][:label_id].present?
+        @tasks = @tasks.search_with_label(params[:task][:label_id])
       end
     end
     @tasks = @tasks.order(created_at: :desc).page(params[:page]).per(2)
@@ -73,7 +71,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :content, :deadline, :status, :priority, :user_id)
+    params.require(:task).permit(:title, :content, :deadline, :status, :priority, :user_id, { label_ids: [] } )
   end
 
 end

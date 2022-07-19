@@ -18,6 +18,14 @@
   <%= form.hidden_field :priority %>
   <p>優先度: <%= t("enums.task.priority.#{@task.priority}") %></p>
 
+  <% @task.labels.each do |label| %> 
+    <%= form.hidden_field :label_ids, multiple: true, value: label.id %> 
+  <% end %>
+  <p>タグ:
+  <% @task.labels.each do |label| %> 
+    <%= label.name %>
+  <% end %></p>
+
   <%= form.submit "登録する" %>
   <%= form.submit "戻る", name: 'back' %>
 
