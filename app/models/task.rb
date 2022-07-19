@@ -22,8 +22,8 @@ class Task < ApplicationRecord
     where(status: status) 
   }
 
-  scope :search_with_label, ->(labels){
-    where(id: params[:label_id])
+  scope :search_with_label, ->(label){
+    joins(:labels).where('label_id = ?', label)
   }
 
   paginates_per 2

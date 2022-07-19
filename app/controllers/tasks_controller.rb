@@ -15,7 +15,7 @@ class TasksController < ApplicationController
       elsif params[:task][:title].present?
         @tasks = @tasks.search_with_title(params[:task][:title])
       elsif params[:task][:label_id].present?
-        @tasks = @tasks.joins(:labels).search_with_label(params[:task][:label_id])
+        @tasks = @tasks.search_with_label(params[:task][:label_id])
       end
     end
     @tasks = @tasks.order(created_at: :desc).page(params[:page]).per(2)
@@ -41,7 +41,6 @@ class TasksController < ApplicationController
   end
 
   def show
-    # @middle = current_user.middles.find_by(task_id: @task.id)
   end
 
   def edit
